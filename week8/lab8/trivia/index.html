@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+
+    </head>
+    <body>
+        <script>
+            // TODO: Add code to check answers to questions
+            document.addEventListener('DOMContentLoaded',function() {
+                let correct=document.querySelector('.correct' );
+                correct.addEventListener("click", function() {
+                    correct.style.backgroundColor = "green";
+                    document.querySelector("#feedback1").innerHTML = "Correct !";
+
+                });
+                let incorrect= document.querySelectorAll(".incorrect");
+
+                    for (let i=0;incorrect.length;i++)
+                    {
+                        incorrect[i].addEventListener("click",function() {
+                            incorrect[i].style.backgroundColor = "red";
+                            document.querySelector("#feedback1").innerHTML="Incorrect !";
+                        });
+                    }
+                });
+                    document.addEventListener('DOMContentLoaded',function() {
+
+                document.querySelector( '#check' ).addEventListener("click", function() {
+                    let input= document.querySelector( 'input' );
+
+                    if (input.value === 'Au'){
+                        input.style.backgroundColor ="green";
+                        document.querySelector("#feedback2").innerHTML="correct!";
+                    }else{
+                        input.style.backgroundColor ="red";
+                        document.querySelector("#feedback2").innerHTML="incorrect!";
+                    }
+
+                });
+            });
+
+        </script>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <!-- TODO: Add multiple choice question here -->
+                <h3>Which planet is known as the "Red Planet"?</h3>
+                <button  class ="incorrect">Venus </button>
+                <button class ="correct">Mars</button>
+                <button class ="incorrect" >Jupiter</button>
+                <button class ="incorrect" >Mercury</button>
+                <p id="feedback1"></p>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <!-- TODO: Add free response question here -->
+                <h3>What is the chemical symbol for gold</h3>
+                <input type="text" ></input>
+                <button  id="check">Check Answer</button>
+                <p id="feedback2"></p>
+
+            </div>
+        </div>
+
+    </body>
+</html>
+>

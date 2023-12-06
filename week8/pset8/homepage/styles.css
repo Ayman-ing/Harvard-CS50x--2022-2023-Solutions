@@ -1,0 +1,177 @@
+body
+{
+    background-color:#000000;
+}
+h1{
+    margin-left: 46%;
+    padding-top:1%;
+    color:#305090;
+
+}
+#description
+{
+    margin-left:28%;
+    color:white;
+}
+#logo
+{
+    width :5%;
+    height : 5 %;
+    margin-left: 47.5%;
+
+    border-radius:50%;
+
+}
+#head
+{
+    margin-top:8%;
+}
+.icon
+{
+    width:4%;
+    height:4%;
+    padding-left:20px;
+}
+#icons
+{
+    margin-left:38%;
+}
+.row
+{
+    background-color:purple;
+}
+
+.navbar-brand
+{
+    color:#305090 ;
+    font-size:50px;
+}
+.nav,.justify-content-center
+{
+    background-color:#303030;
+}
+.navbar, .navbar-expand-lg ,.avbar-light ,.bg-light
+{
+    background-image: linear-gradient(to left, #282828 ,#282828,rgb(28, 28, 28)) ;/*background de couleur dégradé*/
+
+}
+.nav-item ,.nav-link,.sr-only ,.disabled,.active
+{
+    color:white;
+}
+form {
+    max-width: 80%;
+    margin: 2% 25%;
+    padding: 20px;
+    background-color: #121212;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+
+  label,legend {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  input[type="text"],
+  input[type="email"]
+   {
+    display: block;
+    width: 98%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+  }
+
+  input[type="submit"]
+  {
+    display:block;
+    margin-left: 80%;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  textarea
+  {
+    display: block;
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+
+  }
+  .nav-item ,.nav-link , .disabled
+  {
+    color:#305090;
+  }
+  #pdficon
+  {
+    max-width:10%;
+    max-height:10%;
+  }
+  .cv
+  {
+    display:flex;
+    align-items: center;
+     justify-content: center;
+     margin-top:10%;
+   /* Adjust the height as needed */
+  }
+  h2
+  {
+    color:white;
+  }
+  #feedback1
+  {
+    color:white;
+  }
+  .container
+  {
+    margin-top:10%;
+    display: block;
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+
+  }
+#mail
+{
+  color:white;
+  display:flex;
+    align-items: center;
+     justify-content: center;
+     margin-top:3%;
+
+    padding-left:20px;
+}
+h5
+{
+  padding-left:10px;
+}
+
+
+.move img {
+  transition: transform 0.3s;
+}
+
+.move :hover  img{
+  transform: translateX(5px) translateY(-10px);
+}
