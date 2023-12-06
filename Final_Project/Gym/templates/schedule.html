@@ -1,0 +1,425 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Schedule
+{% endblock %}
+
+
+
+{% block main %}
+{% if success %}
+  <div class="alert alert-success" role="alert">{{success}}</div>
+{% endif %}
+  <!--view the events -->
+<div id="accordion">
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button id="add_m" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+           <h5>View Events</h5> 
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="card-body">
+            <table width="100%">
+                <thead>
+                    <tr>
+              
+                      <th scope="col">Sport</th>
+                      <th scope="col">Starting Time</th>
+                      <th scope="col">Ending Time</th>
+                      <th scope="col">Repeat Pattern</th>
+                      <th scope="col">Days Of Week</th>
+                      <th scope="col">Start Date</th>
+                      <th scope="col">End Date</th>
+              
+                       
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!--iterating of the events-->
+
+                        {% for event in events %}
+                        <tr>
+                            <td>{{event.sp_name[0].sp_name}}</td>
+                            <td>{{event.starts_at}}</td>
+                            <td>{{event.ends_at}}</td>
+                            <td>{{event.repeat_pattern}}</td>
+                            <td>{{event.days_output}}</td>
+                            <td>{{event.start_date}}</td>
+                            <td>{{event.end_date}}</td>
+                            <!--edit-->
+                            <td>
+                            {% if event.days %}
+                                <button type="button" class="custom-button"  data-bs-toggle="modal" data-bs-target="#edit{{loop.index}}" id="edit" >Edit</button> 
+                                
+                            <!-- Modal edit-->
+                    <div class="modal fade" id="edit{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <!-- Modal edit -->
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Edit {{event.sp_name}}</h5>
+                                <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                  
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <table  width="100%" id="event">
+                                    <form action="/schedule/{{year}}/{{month}}" method="post" id="myForm">
+                                      <input type="hidden" name="form_id" value="formsch-edit">
+                                      <input type="hidden" name="sc_id" value="{{event.sc_id}}">
+                                     
+                                      <tr>
+                                        <td colspan="2">
+                                          
+                                      <div class="mb-3">
+                                        <label for="selectOption" id="label">Select a Sport:</label>
+                                        <select class="form-control" id="sp_name" name="sp_name" value="{{event.sp_id}}">
+                                          <option value="">˅</option>
+                                          {% for s in sport %}
+                                          
+                                          <option value="{{s.sp_id}}" >{{s.sp_name}}</option>
+                                          {% endfor %}
+                                        </select>
+                                      </div>
+                                    </td>
+                                        </tr>
+                                         <tr >
+                                            <td >
+                                            <div class="mb-3">
+                                              <label>Starting Time <input autocomplete="off" autofocus class="form-control mx-auto w-auto" 
+                                                id="starts_at" name="starts_at" placeholder="Begin Hour" type="time" value=""></label> 
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="mb-3">
+                                                <label>Ending Time<input autocomplete="off" autofocus class="form-control mx-auto w-auto" 
+                                                id="ends_at" name="ends_at" placeholder="End Hour" type="time" value=""></label> 
+                                              </div>
+
+                                        </td>
+                                        </tr>
+                                        <tr><td colspan="2"><label for="choice">Repeating Pattern:</label>
+                                            <select id="choice" name="repeat_pattern"  class="form-control" >
+                                                <option value="{{event.repeat_pattern}}">˅</option>
+                                                <option value="irregular">Irregular</option>
+                                                <option value="weekly">Weekly</option>
+                                                <option value="daily">Daily</option>
+                                                
+                                            </select>
+                                            <br>
+                                            <div id="inputContainer">
+                                                <label for="inputField">Days of week:</label>
+                                                <br>
+                                                <!--making the default values checked-->
+                                                {% if event.days %}
+                                                {% for i in range(7) %}
+                                                    {% if  i | string in event.days %}
+                                                    <label>
+                                                        <input type="checkbox" name="days[]" value="{{i}}" checked>
+                                                        {{week_days[i]}}
+                                                    </label>
+                                                    {% else %}
+                                                    <label>
+                                                        <input type="checkbox" name="days[]" value="{{i}}" >
+                                                        {{week_days[i]}}
+                                                    </label>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% else %}
+                                                {% for i in range(7) %}
+                                                <label>
+                                                    <input type="checkbox" name="days[]" value="{{i}}" >
+                                                    {{week_days[i]}}
+                                                </label>
+                                                {% endfor %}
+                                                {% endif %}
+                                            </div></td></tr>
+                                            <tr>
+                                                <td>   
+                                                <div class="mb-3">
+                                                    <label>Start Date <input autocomplete="off" autofocus class="form-control mx-auto w-auto" 
+                                                        id="m_type" name="start_date" placeholder="Start Date" type="date" value="{{event.start_date}}"></label> 
+                                                </div>
+                                            </td>
+                                                <td>
+                                                    <div class="mb-3">
+                                                        <label>End Date <input autocomplete="off" autofocus class="form-control mx-auto w-auto" 
+                                                            id="m_type" name="end_date" placeholder="End Date" type="date" value="{{event.end_date}}"></label> 
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                  
+                               
+                                    
+                                </table>
+                                
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Edit</button>
+                            </form> 
+                            </div>
+                            </div>
+                          </div>
+                    </div>
+                    {% endif %}
+                    <button type="button" class="custom-button"  data-bs-toggle="modal" data-bs-target="#delete{{loop.index}}" id="delete" >Delete</button>
+                    <!--model delete event-->
+ <div class="modal fade" id="delete{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete {{event.sp_name[0].sp_name}} </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-warning" role="alert">
+            Are you sure you want to delete this event ?
+          </div>
+          
+          <form action="/schedule/{{year}}/{{month}}" method="post" id="myForm">
+            <input type="hidden" name="form_id" value="formsch-delete">
+            <input type="hidden" name="sc_id" value="{{event.sc_id}}">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Delete</button>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                  </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+
+<div class="btn-group" role="group" aria-label="Basic example">
+{% if month ==1 %}<button type="button" class="btn btn-secondary">
+<a href="{{ url_for('schedule', year=year-1, month=12) }}">Previous Month</a></button>
+{% else %}
+<button type="button" class="btn btn-secondary">
+<a href="{{ url_for('schedule', year=year, month=month-1) }}">Previous Month</a></button>
+{% endif %}
+<button type="button" class="btn btn-secondary"><a href="{{ url_for('schedule', year=year, month=month) }}"> {{month}} {{year}}  </a></button></button>
+{% if month==12 %}
+<button type="button" class="btn btn-secondary">
+<a href="{{ url_for('schedule', year=year+1, month=1) }}">Next Month    </a></button>
+{% else %}
+<button type="button" class="btn btn-secondary">
+     <a href="{{ url_for('schedule', year=year, month=month+1) }}">Next Month     </a></button>
+{% endif %}
+</div>
+
+
+  
+    
+  
+<table id="schedule" >
+    <tr>
+        
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+        <th>Sunday</th>
+    </tr>
+   
+    {% for week in cal %}
+   
+    
+   
+        <tr>
+            
+            {% for day in week %}
+            
+                <td>
+                    
+                    {% if day != 0 %}
+                    
+                    <!-- Button trigger modal -->
+                    <button id="schedule_button" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#event{{ day }}">
+                     
+                        <div class="date">{{ day }}</div>
+                        
+                        <ul id="events">
+                            
+                            {% for event in current_events.values() %}
+                                {% if event[0] == '%04d-%02d-%02d' % (year,month,day) %}
+                                      
+                                        <li>{{event[1]}} : {{event[2]}}-{{event[3]}}</li>
+                                       
+                                    
+                                
+                                {% endif %}
+                                
+                            {% endfor %}
+                        </ul>
+                        
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="event{{day}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <!-- Modal content here -->
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                <button type="button"  class="btn-close" data-dismiss="modal" aria-label="Close">
+                                  
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <table  width="100%" id="event">
+                                    <form action="/schedule/{{year}}/{{month}}" method="post" id="myForm">
+                                      <input type="hidden" name="form_id" value="formsch-add">
+                                      <input type="hidden" name="event_date" value="{{'%04d-%02d-%02d' % (year,month,day)}}">
+                                     
+                                      <tr>
+                                        <td colspan="2">
+                                          
+                                      <div class="mb-3">
+                                        <label for="selectOption" id="label">Select a Sport:</label>
+                                        <select class="form-control" id="sp_name" name="sp_name" required>
+                                          <option value="">˅</option>
+                                          {% for s in sport %}
+                                          
+                                          <option value="{{s.sp_name}}" >{{s.sp_name}}</option>
+                                          {% endfor %}
+                                        </select>
+                                      </div>
+                                    </td>
+                                        </tr>
+                                         <tr >
+                                            <td >
+                                            <div class="mb-3">
+                                              <label>Starting Time <input autocomplete="off" autofocus class="form-control mx-auto w-auto" 
+                                                id="starts_at" name="starts_at" placeholder="Begin Hour" type="time" required></label> 
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="mb-3">
+                                                <label>Ending Time<input autocomplete="off" autofocus class="form-control mx-auto w-auto" 
+                                                id="ends_at" name="ends_at" placeholder="End Hour" type="time" required></label> 
+                                              </div>
+
+                                        </td>
+                                        </tr>
+                                        <tr><td colspan="2"><label for="choice">Repeating Pattern:</label>
+                                            <select id="choice" name="repeat_pattern"  class="form-control" >
+                                                <option value="irregular">Irregular</option>
+                                                <option value="weekly">Weekly</option>
+                                                <option value="daily">Daily</option>
+                                                
+                                            </select>
+                                            <br>
+                                            <div id="inputContainer">
+                                                <label for="inputField">Days of week:</label>
+                                                <br>
+                                                <label>
+                                                    <input type="checkbox" name="days[]" value="0">
+                                                    Monday
+                                                </label>
+                                                
+                                                <label>
+                                                    <input type="checkbox" name="days[]" value="1">
+                                                    Tuesday
+                                                </label>
+                                                <br>
+                                                <label>
+                                                    <input type="checkbox" name="days[]" value="2">
+                                                    Wednesday
+                                                </label>
+                                                
+                                                <label>
+                                                    <input type="checkbox" name="days[]" value="3">
+                                                    Thursday
+                                                </label>
+                                                <br>
+                                                <label>
+                                                    <input type="checkbox" name="days[]" value="4">
+                                                    Friday
+                                                </label>
+                                                <label>
+                                                    <input type="checkbox" name="days[]" value="5">
+                                                    Saturday
+                                                </label>
+                                                <label>
+                                                    <input type="checkbox" name="days[]" value="6">
+                                                    Sunday
+                                                </label>
+                                            </div></td></tr>
+                                            <tr>
+                                                <td>   
+                                                <div class="mb-3">
+                                                    <label>Start Date <input autocomplete="off" autofocus class="form-control mx-auto w-auto" 
+                                                        id="m_type" name="start_date" placeholder="Start Date" type="date" required></label> 
+                                                </div>
+                                            </td>
+                                                <td>
+                                                    <div class="mb-3">
+                                                        <label>End Date <input autocomplete="off" autofocus class="form-control mx-auto w-auto" 
+                                                            id="m_type" name="end_date" placeholder="Start Date" type="date" required></label> 
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                  
+                               
+                                    
+                                </table>
+                                
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </form> 
+                            </div>
+                            </div>
+                          </div>
+                    </div>
+            
+                    
+                    
+                        
+                    
+                    {% endif %}
+
+                </td>
+                
+            {% endfor %}
+            
+        </tr>
+        
+    {% endfor %}
+</table>
+<div class="btn-group" id="button_cal" role="group" aria-label="Basic example">
+  {% if month ==1 %}<button type="button" class="btn btn-secondary">
+  <a href="{{ url_for('schedule', year=year-1, month=12) }}">Previous Month</a></button>
+  {% else %}
+  <button type="button" class="btn btn-secondary">
+  <a href="{{ url_for('schedule', year=year, month=month-1) }}">Previous Month</a></button>
+  {% endif %}
+  <button type="button" class="btn btn-secondary"><a href="{{ url_for('schedule', year=year, month=month) }}"> {{month}} {{year}}  </a></button></button>
+  {% if month==12 %}
+  <button type="button" class="btn btn-secondary">
+  <a href="{{ url_for('schedule', year=year+1, month=1) }}">Next Month    </a></button>
+  {% else %}
+  <button type="button" class="btn btn-secondary">
+       <a href="{{ url_for('schedule', year=year, month=month+1) }}">Next Month     </a></button>
+  {% endif %}
+  </div>
+{% endblock %}

@@ -1,0 +1,249 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Coaches
+{% endblock %}
+
+
+
+{% block main %}
+{% if success %}
+<div class="alert alert-success" role="alert">{{success}}</div>
+{%elif error %}
+<div class="alert alert-danger" role="alert">{{error}}</div>
+{% endif %}
+<h2 id="coaches">Coaches</h2>
+<h3 id="add_coach">Add Coach</h3>
+<div clas="table-container"></div>
+<table class="table table-striped" id="coaches_table">
+    <thead>
+      <tr>
+
+        <th scope="col">Name</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Salary</th>
+        <th scope="col">last_Payment</th>
+        
+
+         
+        <th scope="col">Action</th>
+      </tr>
+      {% for c in coaching_view %}
+      <tr>
+        <td>{{c.co_Fname}} {{c.co_Lname}}</td>
+        <td>{{c.co_num}}</td>
+        <td>{{c.salary}} TND</td>
+        <td>{{c.paid_at}}</td>
+        <td id="buttons">  
+          <button type="button" class="custom-button"  data-bs-toggle="modal" data-bs-target="#viewModal{{loop.index}}" id="view" >View</button>
+          <button type="button" class="custom-button"  data-bs-toggle="modal" data-bs-target="#edit{{loop.index}}" id="edit" >Edit</button> 
+           <button type="button" class="custom-button"  data-bs-toggle="modal" data-bs-target="#delete{{loop.index}}" id="delete" >Delete</button>
+          
+          <!-- Modal view -->
+          <div class="modal fade" id="viewModal{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Coach Details</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                   
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <span id="content">
+                  <ul>
+                    
+                  <li>Name :{{c.co_Fname}} {{c.co_Lname}}</li>
+                   
+                  <li>Phone number : {{c.co_num}}</li>
+                    <li>Salary: {{c.salary}} TND</li>
+                      <li>Last Payement : {{c.paid_at}}</li>
+                    
+                </ul>
+              </span>
+              <h5 class="title">Coaching Plan</h5>
+              <table  id="member_detail">
+                <tr><td>Sport</td><td>start</td><td>end</td>
+                <tr>
+                  
+                  
+                   
+                  <td>{{c.sp_name}}</td><td>{{c.starts_at}}</td><td>{{c.ends_at}}</td>
+                  </td></tr>
+              </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  
+                </div>
+              </div>
+            </div>
+          </div>  
+           <!-- Modal edit-->
+               <div class="modal fade" id="edit{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <!-- Modal edit -->
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Edit {{c.co_Fname}} {{c.co_Lname}}</h5>
+                        <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                          
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <table  width="100%" id="event">
+                          <form action="/coach" method=post>
+                            <div class="form-group">
+                              <input hidden name="form_id" value="formco-edit">
+                              <input hidden name="co_id" value="{{c.co_id}}">
+                              <label for="exampleInputEmail1">First Name</label>
+                              <input type="text" class="form-control" name="co_Fname" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter first Name" value="">
+                              
+                            </div>
+                            <br>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">Last Name</label>
+                              <input type="text" class="form-control" name="co_Lname" id="exampleInputPassword1" placeholder="Enter Last Name" value="">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">Phone Number</label>
+                              <input type="tel" name="co_num" class="form-control" id="exampleInputPassword1" placeholder="phone number" value="">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">Salary</label>
+                              <input type="number" class="form-control" name="salary" id="exampleInputPassword1" placeholder="0 DNT" value="">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">Paid_at</label>
+                              <input type="date" class="form-control" name="paid_at" id="exampleInputPassword1" value="">
+                            </div>
+                            <br>
+                            <div class="mb-3">
+                              <label for="selectOption" id="label">Select a Coach:</label>
+                              <select class="form-control" id="sp_name" name="sp_id">
+                                <option value="">˅</option>
+                                {% for s in sport %}
+                                
+                                <option value="{{s.co_id}}" >{{s.co_Fname}} {{s.co_Lname}}</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">starts_at</label>
+                              <input type="date" class="form-control" name="starts_at" id="exampleInputPassword1" >
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">ends_at</label>
+                              <input type="date" class="form-control" name="ends_at" id="exampleInputPassword1" >
+                            </div>
+                         
+                          
+                        
+                        </table>   
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </form> 
+                    </div>
+                    </div>
+                  </div>
+            </div>
+            <!-- model delete-->
+            <div class="modal fade" id="delete{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete {{c.co_Fname}} {{c.co_Lname}} number:{{c.co_num}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                      
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="alert alert-warning" role="alert">
+                      Are you sure you want to delete this coach ?
+                    </div>
+                    
+                    <form action="/coach" method="post" id="myForm">
+                      <input type="hidden" name="co_id" value="{{c.co_id}}">
+                      <input type="hidden" name="form_id" value="formco-delete">
+                    
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                  </form>
+                </div>
+                </div>
+              </div>
+            </div>
+          </td>
+      </tr>
+      {% endfor %}
+
+    </thead>
+    <tbody>
+</table>
+
+
+<table id="coaches_form">
+<tr><td>
+  <!--add-->
+    <form action="/coach" method=post>
+        <div class="form-group">
+          <input hidden name="form_id" value="formco-add">
+          
+          <input type="text" class="form-control" name="co_Fname" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter first Name" required>
+          
+        </div>
+        <br>
+        <div class="form-group">
+          
+          <input type="text" class="form-control" name="co_Lname" id="exampleInputPassword1" placeholder="Enter Last Name" required>
+        </div>
+        <br>
+        <div class="form-group">
+          
+          <input type="tel" name="co_num" class="form-control" id="exampleInputPassword1" placeholder="phone number" required>
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Salary</label>
+          <input type="number" class="form-control" name="salary" id="exampleInputPassword1" placeholder="0 DNT" >
+        </div>
+        
+        <div class="form-group">
+          <label for="exampleInputPassword1">Paid_at</label>
+          <input type="date" class="form-control" name="paid_at" id="exampleInputPassword1" >
+        </div>
+        <br>
+        <div class="mb-3">
+          <label for="selectOption" id="label">Select a Sport:</label>
+          <select class="form-control" id="sp_name" name="sp_id">
+            <option value="">˅</option>
+            {% for s in sport %}
+            
+            <option value="{{s.sp_id}}" >{{s.sp_name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">starts_at</label>
+          <input type="date" class="form-control" name="starts_at" id="exampleInputPassword1" required>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">ends_at</label>
+          <input type="date" class="form-control" name="ends_at" id="exampleInputPassword1" >
+        </div>
+
+        <br>
+        <button type="submit" class="btn btn-primary">Add</button>
+      
+    </form>
+</td></tr>
+</table>
+</div>
+{% endblock %}
