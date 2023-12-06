@@ -1,0 +1,15 @@
+sort1 uses: Bubble sort
+
+How do you know?: it needs fewer time to exucute a file when it's sorted than when it's reversed.the bubble sort is the only sort of those 3 who have a big Ω lower
+than a big O
+
+sort2 uses: Merge sort
+
+How do you know?: it's the faster sort when we exucute a reversed file which means that it has the lower big O.(n logn) is lower than (n²) so it's the Merge sort
+
+sort3 uses: Selection sort
+
+How do you know?: well, it can be deduced by elimination of the two other sorts or ,simply, because this sort and the sort 2 need nearly the same time to execute
+a file of  50000 lines for exemple in the best case aand the worst case (reversed and sorted) so they they have the same value of big O and big Ω
+but sort2 is faster than the sort3 and we all know that (n logn) is lower than (n²)
+,then, sort3 is the selection sort and sort 2 is the merge sort
