@@ -37,7 +37,7 @@ This repository contains my solutions for the problem sets and labs from Harvard
 ## Week 4
 
 ### Problems
-- [volume](week4/lab4/smiley)
+- [smiley](week4/lab4/smiley)
 - [filter-more](week4/pset4/filter-more)
 - [recover](week4/pset4/recover)
 
@@ -46,19 +46,18 @@ This repository contains my solutions for the problem sets and labs from Harvard
 
 ### Problems
 
-- [speller](week5/lab5/speller)
-- [inheritance.c](week5/pset5/inheritance.c)
+- [inheritance](week5/lab5/inheritance)
+- [speller](week5/pset5/speller)
 
 ## Week 6
 
 ### Problems
-
-- [tournament](week6/lab6/tournament)
-- [hello](week6/pset6/hello)
-- [readability](week6/pset6/readability)
-- [credit](week6/pset6/credit)
-- [cash](week6/pset6/cash)
-
+- [world-cup](week6/lab6/world-cup)
+- [hello](week6/pset6/sentimental-hello)
+- [readability](week6/pset6/sentimental-readability)
+- [credit](week6/pset6/sentimental-credit)
+- [mario](week6/pset6/sentimental-mario-more)
+- [DNA](week6/pset6/dna)
 ## Week 7
 
 ### Problems
