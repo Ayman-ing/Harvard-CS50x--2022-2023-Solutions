@@ -1,0 +1,3 @@
+calculating the average energy, valence, and danceability (avg fonction) and oredering them in descending (order by ...  desc) order and showing (select) the top 2 (limit 2)
+because he might like a song for his energy while it has a big value of danceability or valence for exemple ,tthat's why I propse
+to choose for each song the dominating one (energy , valence or danceability) and calculating the average without including the the other two in the their average
