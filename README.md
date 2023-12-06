@@ -7,9 +7,6 @@ This course has a zero-tolerance plagiarism policy.
 
 This repository contains my solutions for the problem sets and labs from Harvard's CS50 course.
 
-# CS50 - Repository
-
-This repository contains my solutions for the problem sets and labs from Harvard's CS50 course.
 
 ## Week 1
 
