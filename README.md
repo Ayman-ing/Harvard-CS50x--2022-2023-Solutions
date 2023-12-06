@@ -61,8 +61,8 @@ This repository contains my solutions for the problem sets and labs from Harvard
 ## Week 7
 
 ### Problems
-
-- [movies](week7/lab7/movies)
+- [songs](week7/lab7/songs)
+- [movies](week7/pset7/movies)
 - [fiftyville](week7/pset7/fiftyville)
 
 ## Week 8
@@ -77,6 +77,11 @@ This repository contains my solutions for the problem sets and labs from Harvard
 ### Problems
 
 - [Birthdays](week9/lab9/Birthdays)
-- [Final Project](week9/pset9/Final_Project)
+- - [finance](week9/pset9/finance)
+## Week 10
+
+### Problems
+
+- [Final Project](Final_Project)
 
 
