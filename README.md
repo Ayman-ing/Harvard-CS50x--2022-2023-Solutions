@@ -73,8 +73,8 @@ This repository contains my solutions for the problem sets and labs from Harvard
 
 ### Problems
 
-- [Birthdays](week9/lab9/Birthdays)
-- - [finance](week9/pset9/finance)
+- [Birthdays](week9/lab9/birthdays)
+- [finance](week9/pset9/finance)
 ## Week 10
 
 ### Problems
