@@ -28,7 +28,7 @@ This repository contains my solutions for the problem sets and labs from Harvard
 
 ### Problems
 - [sort](week3/lab3/sort)
-- [plurality](week3/lab3/plurality)
+- [plurality](week3/pset3/plurality)
 - [tideman](week3/pset3/tideman)
 
 ## Week 4
