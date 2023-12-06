@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    quoted
+{% endblock %}
+{% block main %}
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Symbol</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <!-- TODO: Loop through the database entries to display them in this table -->
+        <tr>
+            <td>
+                {{result.name}}
+            </td>
+            <td>
+                {{result.price}}
+            </td>
+            <td>
+                {{result.symbol}}
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+{% endblock %}

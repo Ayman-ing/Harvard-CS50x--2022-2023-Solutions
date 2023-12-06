@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Name</th>
+                <th scope="col">Shares</th>
+                <th scope="col">Price</th>
+                <th scope="col">TOTAL</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for s in stock %}
+              <tr>
+              <td> {{s.symbol}}</td>
+              <td> {{s.name}}</td>
+              <td> {{s.shares}}</td>
+              <td> {{s.price}}</td>
+              <td> {{s.TOTAL}}</td>
+
+
+
+              </tr>
+              {% endfor %}
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Cash</td>
+                <td>{{cash}}</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>TOTAL</td>
+                <td>{{total}}</td>
+              </tr>
+
+            </tbody>
+          </table>
+
+
+{% endblock %}

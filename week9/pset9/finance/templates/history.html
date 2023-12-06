@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+
+        <table class="table table-striped">
+            <thead>
+              <tr>
+
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">transaction time</th>
+                <th scope="col">Shares</th>
+                <th scope="col">transaction type</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for s in history %}
+              <tr>
+              <td> {{s.name}}</td>
+              <td> {{s.price}}</td>
+              <td> {{s.trans_at}}</td>
+              <td> {{s.shares}}</td>
+              <td> {{s.trans_type}}</td>
+
+
+
+              </tr>
+              {% endfor %}
+            
+            </tbody>
+          </table>
+
+
+{% endblock %}
