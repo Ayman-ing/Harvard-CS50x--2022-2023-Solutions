@@ -79,6 +79,6 @@ This repository contains my solutions for the problem sets and labs from Harvard
 
 ### Problems
 
-- [Final Project]((https://github.com/Ayman-ing/Gym-Management-System.git))
+- [Final Project](https://github.com/Ayman-ing/Gym-Management-System.git)
 
 
